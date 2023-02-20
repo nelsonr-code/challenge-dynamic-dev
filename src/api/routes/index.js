@@ -1,8 +1,9 @@
 import { Router } from 'express'
-import { TestRouter } from '../components/myComponent/routes.js'
+import { TestRouter, AlbumRouter } from '../components/myComponent/routes.js'
 
 const Routes = Router()
 
 Routes.use('/', TestRouter)
+Routes.use('/albums', AlbumRouter)
 
 export { Routes }
