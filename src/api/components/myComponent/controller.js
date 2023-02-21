@@ -6,30 +6,71 @@ export const testEndpoint = (req, resp) => {
 
 export const createAlbum = async (req, resp) => {
   console.log(req.body)
-  const album = await Album.create(req.body)
-  resp.send(album)
+  try {
+    const album = await Album.create(req.body)
+    console.log('created:', album)
+    resp.send(album)
+  } catch (error) {
+    console.error(`Error creating album: ${error}`)
+    resp.status(500).send('Error creating album')
+  }
 }
 
 export const listAlbums = async (req, resp) => {
-  // const albums = await Album.find({})
   console.log(req.body)
-  const albums = await Album.listAll()
-  resp.send(albums)
+  try {
+    const albums = await Album.listAll()
+    resp.send(albums)
+  } catch (error) {
+    console.error(`Error listing albums: ${error}`)
+    resp.status(500).send('Error listing albums')
+  }
 }
 
 export const getAlbum = async (req, resp) => {
-  const album = await Album.getById(req.params.id)
-  resp.send(album)
+  try {
+    const { id } = req.params
+    const album = await Album.getById(id)
+
+    if (!album) {
+      resp.sendStatus(404)
+    } else {
+      resp.json(album)
+    }
+  } catch (error) {
+    console.error(`Error getting album: ${error}`)
+
+    resp.status(500).json({ message: error })
+  }
 }
 
 export const updateAlbum = async (req, resp) => {
-  const album = await Album.getById(req.params.id)
-  Album.update(album)
-  resp.send(album)
+  try {
+    const { id } = req.params
+    const albumToUpdate = req.body
+    const albumUpdated = await Album.update(id, albumToUpdate)
+
+    resp.json(albumUpdated)
+  } catch (error) {
+    console.error(`Error updating album: ${error}`)
+
+    resp.sendStatus(500).json({ message: 'Error updating album' })
+  }
 }
 
 export const deleteAlbum = async (req, resp) => {
-  const album = await Album.getById(req.params.id)
-  Album.delete(album)
-  resp.send(album)
+  try {
+    const { id } = req.params
+    const isDeleted = await Album.delete(id)
+
+    if (!isDeleted) {
+      resp.sendStatus(404)
+    }
+
+    resp.sendStatus(204)
+  } catch (error) {
+    console.error(`Error deleting album: ${error}`)
+
+    resp.sendStatus(500).json({ message: 'Error deleting album' })
+  }
 }

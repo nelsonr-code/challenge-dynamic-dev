@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from './index.js'
 
-export const Album = sequelize.define('Album', {
+export const Albums = sequelize.define('Album', {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
