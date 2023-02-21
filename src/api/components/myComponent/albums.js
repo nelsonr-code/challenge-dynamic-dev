@@ -10,7 +10,7 @@ export default class Album {
       }
 
       const newAlbum = await Albums.create(albumToCreate)
-      console.log('created:', newAlbum)
+
       return newAlbum
     } catch (error) {
       console.error(`Error creating album: ${error}`)
@@ -20,7 +20,11 @@ export default class Album {
 
   static async listAll() {
     try {
-      const albumList = await Albums.findAll()
+      const albumList = await Albums.findAll({
+        where: {
+          isDeleted: false
+        }
+      })
 
       return albumList
     } catch (error) {
@@ -33,7 +37,8 @@ export default class Album {
     try {
       const album = await Albums.findOne({
         where: {
-          id
+          id,
+          isDeleted: false
         }
       })
 
@@ -63,16 +68,23 @@ export default class Album {
 
   static async delete(id) {
     try {
-      await Albums.destroy({
+      const album = await Albums.findOne({
         where: {
-          id
+          id,
+          isDeleted: false
         }
       })
+      if (!album) {
+        return false
+      } else {
+        album.isDeleted = true
+        album.save()
+      }
 
       return true
     } catch (error) {
-      console.error(`Error deleting album: ${error}`)
-      return false
+      console.error(`Error * deleting album: ${error.message}`)
+      return error
     }
   }
 }
