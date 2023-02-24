@@ -32,10 +32,16 @@ export const getAlbum = async (req, resp) => {
 
     if (!album) {
       // resp.sendStatus(404)
-      resp.status(404).json({ message: 'Album not found' })
+      resp.status(404).json({
+        statusCode: 404,
+        statusText: 'Not found',
+        message: 'Album not found'
+      })
     } else {
       // resp.json(album)
-      resp.status(200).json({ status: 'success', data: album })
+      resp
+        .status(200)
+        .json({ statusCode: 200, statusText: 'success', data: album })
     }
   } catch (error) {
     console.error(`Error getting album: ${error}`)
@@ -74,11 +80,14 @@ export const deleteAlbum = async (req, resp) => {
   try {
     const { id } = req.params
     const isDeleted = await Album.delete(id)
-    console.log(isDeleted instanceof Error)
+    console.log(isDeleted)
 
     if (!isDeleted) {
-      // resp.sendStatus(404)
-      resp.status(404).json({ message: 'Album not found' })
+      resp.status(404).json({
+        statusCode: 404,
+        statusText: 'Not found',
+        message: 'Album not found'
+      })
     } else {
       resp.status(204).json({ message: 'Album deleted' })
     }
