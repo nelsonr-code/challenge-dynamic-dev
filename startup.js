@@ -6,7 +6,7 @@ const startup = async () => {
   try {
     // await sequelize.authenticate()
     // console.log('Connected to database')
-    await sequelize.sync()
+    await sequelize.sync({ force: false })
     console.log('Starting up...')
     await server.start()
   } catch (error) {
