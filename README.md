@@ -11,7 +11,7 @@ Un álbum cuenta solo con el nombre, nombre del artista, año del álbum (2010 �
 - Todas las fuentes deben estar almacenadas en algún repositorio GIT.
 - El front debe ser desarrollado con Angular o React (Puede ser algo simple, no se evaluará el diseño)
 - Puede hacer uso de cualquier framework de css.
-- Debe debe desarrollarse un API rest con un framework de Node (Nest, Express).
+- Debe desarrollarse un API rest con un framework de Node (Nest, Express).
 - Puede hacer uso de cualquier ORM
 - No hacer uso de store procedure ni de query nativo.
 - No hacer eliminado físico.
@@ -20,3 +20,13 @@ Un álbum cuenta solo con el nombre, nombre del artista, año del álbum (2010 �
 
 - Poder ver, agregar, editar eliminar canciones del álbum
 - Pruebas unitarias.
+
+### Run project
+
+- Clone this repository
+- Go to folder
+
+```
+pnpm install
+pnpm run dev:api
+```
