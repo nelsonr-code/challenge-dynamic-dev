@@ -9,13 +9,19 @@ export const createAlbum = async (req, resp, next) => {
   console.log(req.body)
   try {
     const album = await Album.create(req.body)
-    // resp.send(album)
-    resp.status(200).json({ status: 'success', data: album })
+
+    resp
+      .status(200)
+      .json({ statusCode: 200, statusText: 'success', data: album })
   } catch (error) {
     console.error(`Error creating album: ${error}`)
-    // throw new CustomError('Error creating album', 500)
-    // next(error)
-    resp.status(500).send('Error creating album')
+
+    resp.status(error.errors[0].original.status || 500).json({
+      message: error.errors[0].message,
+      statusCode: error.errors[0].original.status || 500,
+      statusText: error.errors[0].type,
+      data: null
+    })
   }
 }
 

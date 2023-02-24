@@ -1,21 +1,31 @@
 import { Albums } from '../../../config/database/models.js'
 export default class Album {
   static async create(albumData) {
-    try {
-      const albumToCreate = {
-        name: albumData.name,
-        artist: albumData.artist,
-        yearRelease: albumData.yearRelease,
-        urlImage: albumData.urlImage
-      }
-
-      const newAlbum = await Albums.create(albumToCreate)
-
-      return newAlbum
-    } catch (error) {
-      console.error(`Error creating album: ${error}`)
-      return error
+    const albumToCreate = {
+      name: albumData.name,
+      artist: albumData.artist,
+      yearRelease: albumData.yearRelease,
+      urlImage: albumData.urlImage
     }
+
+    const newAlbum = await Albums.create(albumToCreate)
+
+    return newAlbum
+    // try {
+    //   const albumToCreate = {
+    //     name: albumData.name,
+    //     artist: albumData.artist,
+    //     yearRelease: albumData.yearRelease,
+    //     urlImage: albumData.urlImage
+    //   }
+
+    //   const newAlbum = await Albums.create(albumToCreate)
+
+    //   return newAlbum
+    // } catch (error) {
+    //   console.error(`Error creating album: ${error}`)
+    //   return error
+    // }
   }
 
   static async listAll() {
