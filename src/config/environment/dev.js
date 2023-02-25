@@ -4,13 +4,11 @@ dotenv.config()
 const DEV_CONFIG = {
   PORT: process.env.PORT,
   BASE_URL: 'http://localhost:3000',
-  DB: {
-    HOST: process.env.DB_HOST,
-    DATABASE: process.env.DB_NAME,
-    PORT: process.env.DB_PORT,
-    USER: process.env.DB_USERNAME,
-    PASSWORD: process.env.DB_PASSWORD
-  }
+  DB_HOST: process.env.DB_HOST,
+  DB_NAME: process.env.DB_NAME,
+  DB_PORT: process.env.DB_PORT,
+  DB_USER: process.env.DB_USERNAME,
+  DB_PASSWORD: process.env.DB_PASSWORD
 }
 
 const { BASE_URL } = DEV_CONFIG
