@@ -40,7 +40,7 @@ class Server {
   start() {
     this.init()
     this.setMiddlewares()
-    this.setApiRoutes('/', Routes)
+    this.setApiRoutes('/api', Routes)
 
     return new Promise((resolve, reject) => {
       const http = this._app.listen(Server.appPort, () => {
