@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 import { sequelize } from './index.js'
 import { CustomError } from '../../helpers/errorsHandler.js'
 
-const LIMIT_ALBUMS = 4
+const LIMIT_ALBUMS = 20
 const DATE_GREATER_THAN_2021 = new Date('2022-01-01')
 const DATE_LESS_THAN_2010 = new Date('2009-12-31')
 
